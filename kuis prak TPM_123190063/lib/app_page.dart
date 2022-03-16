@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppPage extends StatelessWidget {
   final String name;
@@ -27,7 +28,7 @@ class AppPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(name),
       ),
-      body: Container(
+      body: SingleChildScrollView(
         child:Column(
         children:[
           Row(
@@ -37,21 +38,39 @@ class AppPage extends StatelessWidget {
               child: Image.network(imageLogo),
             ),
             Expanded(
-                flex: 2,
-                child: Text(name),
+                flex: 3,
+                child:Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child:Column(
+                  children:[
+                    Row(children:[Text(name, style:TextStyle(fontWeight:FontWeight.bold, fontSize:18))]),
+                    SizedBox(height:20),
+                    Row(children:[Text(developer, style: TextStyle(color: Colors.blue))]),
+                    SizedBox(height:20),
+                    Row(children:[Text(genre)]),
+                    SizedBox(height:20),
+                    Row(children: [
+                      Text(rating ),
+                      new Icon(Icons.star),
+                    ]
+                    )
+                  ]
+                  )
+                )
             ),
           ],
         ),
           Container(
+            padding:EdgeInsets.symmetric(horizontal:20),
+            child: Text(description)
+          ),
+          Container(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              width: MediaQuery.of(context).size.width,
+              height:50,
+              width: 300,
               child: ElevatedButton(
-                onPressed: () async {
-                  // if(await canLaunch(appLink)){
-                  //   await launch(appLink);
-                  // } else{
-                  //   throw 'Could not launch $appLink';
-                  // }
+                onPressed: () {
+                  _launchURL(appLink);
                 }, // Respon ketika button ditekan
                 child: Text("Download"),
               )
@@ -60,5 +79,13 @@ class AppPage extends StatelessWidget {
       )
     )
     );
+  }
+}
+
+Future<void> _launchURL(url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

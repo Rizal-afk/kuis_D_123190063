@@ -64,16 +64,21 @@ class HomePage extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(data.name),
-                  SizedBox(height:10),
-                  Text(data.genre),
-                  SizedBox(height:10),
-                  Text(data.rating ),
-                  new Icon(Icons.star),
-                ],
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child:Column(
+                  children: [
+                    Row(children:[Text(data.name, style:TextStyle(fontWeight:FontWeight.bold, fontSize:18))]),
+                    SizedBox(height:20),
+                    Row(children:[Text(data.genre)]),
+                    SizedBox(height:20),
+                    Row(children: [
+                      Text(data.rating ),
+                      new Icon(Icons.star),
+                    ]
+                    )
+                  ],
+                )
               )
             ),
           ],
