@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AppPage extends StatelessWidget {
   final String name;
@@ -48,11 +47,11 @@ class AppPage extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
                 onPressed: () async {
-                  if(await canLaunch(appLink)){
-                    await launch(appLink);
-                  } else{
-                    throw 'Could not launch $appLink';
-                  }
+                  // if(await canLaunch(appLink)){
+                  //   await launch(appLink);
+                  // } else{
+                  //   throw 'Could not launch $appLink';
+                  // }
                 }, // Respon ketika button ditekan
                 child: Text("Download"),
               )
